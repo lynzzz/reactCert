@@ -149,7 +149,7 @@ class App extends Component {
         <Header title="Trave Document Administration System"
           onListRecord={this.onListRecord}
           onEditDoctor={this.onEditDoctor}
-          onEditClerk = {this.onEditClerk}
+          onEditClerk={this.onEditClerk}
           onSignOut={this.signOutFirebase}
           appModule={this} />
         {page}

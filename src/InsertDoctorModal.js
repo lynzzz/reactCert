@@ -107,7 +107,11 @@ class InsertDoctorModal extends React.Component{
     let ret = [];
     let h= this.props.hospitals;
     let hospital = h[this.state.selHospital];
-    ret.push({"value" : this.state.selHospital, "label" : hospital.nameCh});
+    if ( hospital === undefined ){
+      ret.push({"value" : "", "label" : ""});
+    }else{
+      ret.push({"value" : this.state.selHospital, "label" : hospital.nameCh});
+    }
     this.setState({options : ret});
   }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase';
 import Select from 'react-select';
-import { Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter} from 'react-modal-bootstrap';
+import { Modal, ModalBody, ModalFooter} from 'react-modal-bootstrap';
 
 
 class InsertDoctorModal extends React.Component{
@@ -99,8 +99,14 @@ class InsertDoctorModal extends React.Component{
   getEditHospitalList(){
     let ret = [];
     let h= this.props.hospitals;
+
     let hospital = h[this.state.selHospital];
-    ret.push({"value" : this.state.selHospital, "label" : hospital.nameCh});
+    console.log("hospital key in getEdit", this.state.selHospital)
+    if ( hospital === undefined ){
+      ret.push({"value" : "", "label" : ""});
+    }else{
+        ret.push({"value" : this.state.selHospital, "label" : hospital.nameCh});
+      }
     this.setState({options : ret});
   }
 

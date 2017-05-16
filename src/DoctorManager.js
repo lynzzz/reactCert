@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BootstrapTable, TableHeaderColumn, InsertButton} from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import * as firebase from 'firebase';
 import InsertDoctorModal from "./InsertDoctorModal"
 
@@ -40,8 +40,8 @@ class DoctorManager extends Component {
 					let newdoctorAffiliationArray = [];
 		      let doctors = options.val().doctors;
 					let hospitals = options.val().hospitals;
-		      let targetHospital = null;
-					let city = null;
+		      let targetHospital = "";
+					let city = "";
 
 		      for( var keyDoctor in doctors){
 
@@ -52,7 +52,7 @@ class DoctorManager extends Component {
 							 for( var keyHospital in hospitals){
 							     let hospital = hospitals[keyHospital];
 									 let doctorsOfHospital = hospital.doctors;
-		               let found = false;
+		               var found = false;
 									 for(  let keydoctorOfHospital in doctorsOfHospital){
 
 
@@ -67,6 +67,11 @@ class DoctorManager extends Component {
 									 if ( found){
 										 break;
 									 }
+							 }
+
+							 if ( !found ){
+								 targetHospital = "";
+								 city = "";
 							 }
 
 
@@ -111,7 +116,7 @@ class DoctorManager extends Component {
 							 let hospital = hospitals[key];
 
 							 // Find this hospital
-							 if ( hospital.nameCh == row.hospital){
+							 if ( hospital.nameCh === row.hospital){
 
 									 // Get hospital's doctors;
 									let doctorsID = hospital.doctors;
@@ -176,7 +181,7 @@ class DoctorManager extends Component {
 						 let hospital = hospitals[key];
 
 						 // Find this hospital
-						 if ( hospital.nameCh == row.hospital){
+						 if ( hospital.nameCh === row.hospital){
 
 								 // Get hospital's doctors;
 								let doctorsID = hospital.doctors;
@@ -231,7 +236,6 @@ class DoctorManager extends Component {
 					}
 
           newState.originalDoctorKeyFromEditButton = targetDoctorKey;
-					newState.orignailHospitalKeyFromEditButton = targetHospitalKey;
 					newState.fromEditButton = true;
 					this.refs.refModal.setState(newState);
 					this.refs.refModal.openModal();
@@ -280,7 +284,7 @@ class DoctorManager extends Component {
 	render() {
 
 		const options = {
-		    defaultSortName: 'city',
+		    defaultSortName: 'hospital',
 		    defaultSortOrder: 'desc',
 		    sizePerPage: 10,
 	  };
@@ -292,7 +296,7 @@ class DoctorManager extends Component {
                 <div className="form-group">
                     <div className="col-md-10">
                     </div>
-										<InsertDoctorModal ref= "refModal" hospitals = {this.props.hospitals} doctorManager = {this} />
+										<InsertDoctorModal ref="refModal" hospitals={this.props.hospitals} doctorManager={this} />
                 </div>
                 <div className="form-group">
                     <div className="col-md-10">

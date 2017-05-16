@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BootstrapTable, TableHeaderColumn, InsertButton} from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import * as firebase from 'firebase';
 import InsertClerkModal from "./InsertClerkModal"
 
@@ -40,8 +40,8 @@ class ClerkManager extends Component {
 					let newClerkAffiliationArray = [];
 		      let clerks = options.val().clerks;
 					let hospitals = options.val().hospitals;
-		      let targetHospital = null;
-					let city = null;
+		      let targetHospital = "";
+					let city = "";
 
 		      for( var keyClerk in clerks){
 
@@ -52,7 +52,7 @@ class ClerkManager extends Component {
 							 for( var keyHospital in hospitals){
 							     let hospital = hospitals[keyHospital];
 									 let clerksOfHospital = hospital.clerks;
-		               let found = false;
+		               var found = false;
 									 for(  let keyClerkOfHospital in clerksOfHospital){
 
 
@@ -67,6 +67,11 @@ class ClerkManager extends Component {
 									 if ( found){
 										 break;
 									 }
+							 }
+
+							 if ( !found ){
+								 targetHospital = "";
+								 city = "";
 							 }
 
 
@@ -113,7 +118,7 @@ class ClerkManager extends Component {
 							 let hospital = hospitals[key];
 
 							 // Find this hospital
-							 if ( hospital.nameCh == row.hospital){
+							 if ( hospital.nameCh === row.hospital){
 
 									 // Get hospital's clerks;
 									let clerksID = hospital.clerks;
@@ -157,8 +162,8 @@ class ClerkManager extends Component {
 					let newState = Object.assign({}, this.refs.refModal.states);
 					let bHospitalMatch = false;
 					let bClerkMatch = false;
-					let targetHospitalKey = null;
-					let targetClerkKey = null;
+					let targetHospitalKey = "";
+					let targetClerkKey = "";
 
 
 					// Find  clerk from clerk table
@@ -178,7 +183,7 @@ class ClerkManager extends Component {
 						 let hospital = hospitals[key];
 
 						 // Find this hospital
-						 if ( hospital.nameCh == row.hospital){
+						 if ( hospital.nameCh === row.hospital){
 
 								 // Get hospital's clerks;
 								let clerksID = hospital.clerks;
@@ -264,7 +269,7 @@ class ClerkManager extends Component {
 	render() {
 
 		const options = {
-		    defaultSortName: 'city',
+		    defaultSortName: 'hospital',
 		    defaultSortOrder: 'desc',
 		    sizePerPage: 10,
 	  };
@@ -276,7 +281,7 @@ class ClerkManager extends Component {
                 <div className="form-group">
                     <div className="col-md-10">
                     </div>
-										<InsertClerkModal ref= "refModal" hospitals = {this.props.hospitals} clerkManager = {this} />
+										<InsertClerkModal ref="refModal" hospitals={this.props.hospitals} clerkManager={this} />
                 </div>
                 <div className="form-group">
                     <div className="col-md-10">
