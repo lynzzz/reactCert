@@ -1,0 +1,29 @@
+{
+  "name": "certificate",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.8.4"
+  },
+  "dependencies": {
+    "axios": "^0.16.1",
+    "firebase": "^3.6.4",
+    "moment": "^2.18.1",
+    "moment-range": "^3.0.3",
+    "rc-time-picker": "^2.4.0",
+    "react": "^15.4.1",
+    "react-bootstrap-table": "^2.7.1",
+    "react-date-picker": "^5.3.28",
+    "react-dom": "^15.4.1",
+    "react-input-calendar": "^0.3.14",
+    "react-modal": "^1.7.7",
+    "react-modal-bootstrap": "^1.1.1",
+    "react-select": "^1.0.0-rc.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
